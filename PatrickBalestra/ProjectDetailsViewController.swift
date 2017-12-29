@@ -76,15 +76,15 @@ class ProjectDetailsViewController: UIViewController, SKStoreProductViewControll
     
     // MARK: IBActions
     
-    @IBAction func dismiss(sender: AnyObject) {
+    @IBAction func dismiss(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func viewInAppStore(sender: AnyObject) {
+    @IBAction func viewInAppStore(_ sender: AnyObject) {
         self.openProjectInAppStore(self.project!.iTunesID)
     }
     
-    @IBAction func viewWebsite(sender: AnyObject) {
+    @IBAction func viewWebsite(_ sender: AnyObject) {
         let URL = self.project!.websiteLink
         UIApplication.shared.openURL(URL)
     }

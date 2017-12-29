@@ -63,9 +63,16 @@ class AchievementTableViewCell: UITableViewCell, UIScrollViewDelegate {
         let firstPage = page - 1
         let lastPage = page + 1
         
-        for i in 0..<firstPage {
-//        for var index = 0; index < firstPage; ++index {
-            purgePage(i)
+        if firstPage < 0 {
+            for i in firstPage..<0 {
+                //for var index = 0; index < firstPage; ++index {
+                purgePage(i)
+            }
+        } else {
+            for i in 0..<firstPage {
+                //for var index = 0; index < firstPage; ++index {
+                purgePage(i)
+            }
         }
         
         for index in firstPage...lastPage {
@@ -93,7 +100,7 @@ class AchievementTableViewCell: UITableViewCell, UIScrollViewDelegate {
             frame.size.width = 768
             frame.size.height = 500
 
-            let newPageView = UIImageView(image: UIImage(named: achievement?.images[page] ?? ""))
+            let newPageView = UIImageView(image: UIImage(named: (achievement?.images[page])!))
             newPageView.contentMode = .scaleAspectFit
             newPageView.frame = frame
             scrollView.addSubview(newPageView)

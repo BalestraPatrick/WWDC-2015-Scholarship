@@ -17,7 +17,7 @@ class WelcomeViewController: UIViewController {
         self.view.addGestureRecognizer(tapGesture)
     }
 
-    @objc @IBAction func dismiss(_ tapGesture: UITapGestureRecognizer) {
+    @objc func dismiss(_ tapGesture: UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
 }
