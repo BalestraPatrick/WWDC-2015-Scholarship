@@ -34,7 +34,7 @@ class SkillsView: UIView {
         
         var frameX = CGFloat(0.0)
         
-        for i in  0...skills.count {
+        for i in  0..<skills.count {
         //for var i = 0; i < count(skills); i++ {
             let skill = skills[i]
             let label = UILabel(frame: CGRect(x: frameX, y: 0, width: 0, height: 0))

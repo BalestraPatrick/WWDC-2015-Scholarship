@@ -29,7 +29,7 @@ class ProjectsCollectionViewController: UICollectionViewController {
     
     // MARK: IBActions
     
-    @IBAction func dismiss(sender: AnyObject) {
+    @IBAction func dismiss(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
     }
     

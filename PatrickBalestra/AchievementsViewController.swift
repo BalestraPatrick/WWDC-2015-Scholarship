@@ -30,7 +30,7 @@ class AchievementsViewController: UIViewController, UITableViewDataSource, UITab
     
     // MARK: IBActions
 
-    @IBAction func dismiss(sender: AnyObject) {
+    @IBAction func dismiss(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
     }
 

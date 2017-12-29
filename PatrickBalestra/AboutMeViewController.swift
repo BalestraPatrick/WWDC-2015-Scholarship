@@ -29,27 +29,27 @@ class AboutMeViewController: UIViewController, UITextViewDelegate {
     
     // MARK - IBActions
     
-    @IBAction func dismiss(sender: AnyObject) {
+    @IBAction func dismiss(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func openGithub(sender: LinkButton) {
+    @IBAction func openGithub(_ sender: LinkButton) {
         LinkOpener.github.openURL()
     }
     
-    @IBAction func sendEmail(sender: LinkButton) {
+    @IBAction func sendEmail(_ sender: LinkButton) {
         LinkOpener.email.openURL()
     }
     
-    @IBAction func openWebsite(sender: LinkButton) {
+    @IBAction func openWebsite(_ sender: LinkButton) {
         LinkOpener.website.openURL()
     }
     
-    @IBAction func openTwitter(sender: LinkButton) {
+    @IBAction func openTwitter(_ sender: LinkButton) {
         LinkOpener.twitter.openURL()
     }
 
-    @IBAction func openFacebook(sender: LinkButton) {
+    @IBAction func openFacebook(_ sender: LinkButton) {
         LinkOpener.facebook.openURL()
     }
     
