@@ -22,11 +22,11 @@
 
 import UIKit
 
-@IBDesignable public class DesignableView: SpringView {
+@IBDesignable public class DesignableTextView: SpringTextView {
     
-    @IBInspectable public var borderColor: UIColor = UIColor.clearColor() {
+    @IBInspectable public var borderColor: UIColor = UIColor.clear {
         didSet {
-            layer.borderColor = borderColor.CGColor
+            layer.borderColor = borderColor.cgColor
         }
     }
     
@@ -41,28 +41,21 @@ import UIKit
             layer.cornerRadius = cornerRadius
         }
     }
-    
-    @IBInspectable public var shadowColor: UIColor = UIColor.clearColor() {
+
+    @IBInspectable public var lineHeight: CGFloat = 1.5 {
         didSet {
-            layer.shadowColor = shadowColor.CGColor
+            let font = UIFont(name: self.font!.fontName, size: self.font!.pointSize)
+            guard let text = self.text else { return }
+            
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = lineHeight
+
+            let attributedString = NSMutableAttributedString(string: text)
+            attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
+            attributedString.addAttribute(NSAttributedStringKey.font, value: font!, range: NSRange(location: 0, length: attributedString.length))
+            
+            self.attributedText = attributedString
         }
     }
-    
-    @IBInspectable public var shadowRadius: CGFloat = 0 {
-        didSet {
-            layer.shadowRadius = shadowRadius
-        }
-    }
-    
-    @IBInspectable public var shadowOpacity: CGFloat = 0 {
-        didSet {
-            layer.shadowOpacity = Float(shadowOpacity)
-        }
-    }
-    
-    @IBInspectable public var shadowOffsetY: CGFloat = 0 {
-        didSet {
-            layer.shadowOffset.height = shadowOffsetY
-        }
-    }
+
 }

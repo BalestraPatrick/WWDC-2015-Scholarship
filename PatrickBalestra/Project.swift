@@ -15,13 +15,13 @@ class Project {
     var title: String
     var iconName: String
     var screenshotNames: [String]
-    var websiteLink: NSURL
+    var websiteLink: URL
     var iTunesID: String
     var date: String
     var skills: [String]
     var appColor: UIColor
     
-    init(title: String, subtitle: String, description: String, iconName: String, screenshotNames: [String], websiteLink: NSURL, iTunesID: String, date: String, skills: [String], appColor: UIColor) {
+    init(title: String, subtitle: String, description: String, iconName: String, screenshotNames: [String], websiteLink: URL, iTunesID: String, date: String, skills: [String], appColor: UIColor) {
         self.title = title
         self.subtitle = subtitle
         self.description = description

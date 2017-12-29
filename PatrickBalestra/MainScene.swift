@@ -28,7 +28,7 @@ class MainScene: SCNScene {
         // About me node
         aboutMeNode = SCNNode(geometry: aboutMeCube)
         aboutMeNode.name = "AboutMe"
-        aboutMeNode.rotation = SCNVector4(x: 0.0, y: 0.0, z: 0.0, w: Float(M_PI/5.0))
+        aboutMeNode.rotation = SCNVector4(x: 0.0, y: 0.0, z: 0.0, w: Float(.pi/5.0))
         aboutMeNode.position = SCNVector3(x: -11, y: 0.0, z: 0.0)
         aboutMeNode.opacity = 0.0
         self.rootNode.addChildNode(aboutMeNode)
@@ -56,7 +56,7 @@ class MainScene: SCNScene {
         // Achievements node
         achievementsNode = SCNNode(geometry: achievementsCube)
         achievementsNode.name = "Achievements"
-        achievementsNode.rotation = SCNVector4(x: 0.0, y: 0.0, z: 0.0, w: -Float(M_PI/5.0))
+        achievementsNode.rotation = SCNVector4(x: 0.0, y: 0.0, z: 0.0, w: -Float(.pi/5.0))
         achievementsNode.position = SCNVector3(x: 10.0, y: -0.5, z: 1.0)
         achievementsNode.opacity = 0.0
         self.rootNode.addChildNode(achievementsNode)
@@ -70,7 +70,7 @@ class MainScene: SCNScene {
         // Interests node
         interestsNode = SCNNode(geometry: interestsCube)
         interestsNode.name = "Interests"
-        interestsNode.rotation = SCNVector4(x: 0.0, y: 0.0, z: 0.0, w: -Float(M_PI/5.0))
+        interestsNode.rotation = SCNVector4(x: 0.0, y: 0.0, z: 0.0, w: -Float(.pi/5.0))
         interestsNode.position = SCNVector3(x: 20.0, y: 0.0, z: 1.0)
         interestsNode.opacity = 0.0
         self.rootNode.addChildNode(interestsNode)
@@ -84,7 +84,7 @@ class MainScene: SCNScene {
         
         // Light
         let light = SCNLight()
-        light.type = SCNLightTypeAmbient
+        light.type = SCNLight.LightType.ambient
         light.color = UIColor(white: 0.25, alpha: 0.5)
 
         // Light node
@@ -111,7 +111,7 @@ class MainScene: SCNScene {
         aboutOpacityLeft.toValue = 1.0
         aboutOpacityLeft.duration = 1.0
         aboutOpacityLeft.fillMode = kCAFillModeForwards;
-        aboutOpacityLeft.removedOnCompletion = false;
+        aboutOpacityLeft.isRemovedOnCompletion = false;
         aboutMeNode.addAnimation(aboutOpacityLeft, forKey: "aboutOpacityLeft")
         
         // Projects animations
@@ -128,8 +128,8 @@ class MainScene: SCNScene {
         projectOpacityAnimation.toValue = 1.0
         projectOpacityAnimation.duration = 1.0
         projectOpacityAnimation.beginTime = CACurrentMediaTime() + 0.4
-        projectOpacityAnimation.fillMode = kCAFillModeForwards;
-        projectOpacityAnimation.removedOnCompletion = false;
+        projectOpacityAnimation.fillMode = kCAFillModeForwards
+        projectOpacityAnimation.isRemovedOnCompletion = false
         projectsNode.addAnimation(projectOpacityAnimation, forKey: "projectOpacityAnimation")
 
         // Achievements animations
@@ -146,8 +146,8 @@ class MainScene: SCNScene {
         achievementsOpacityAnimation.toValue = 1.0
         achievementsOpacityAnimation.duration = 1.0
         achievementsOpacityAnimation.beginTime = CACurrentMediaTime() + 0.8
-        achievementsOpacityAnimation.fillMode = kCAFillModeForwards;
-        achievementsOpacityAnimation.removedOnCompletion = false;
+        achievementsOpacityAnimation.fillMode = kCAFillModeForwards
+        achievementsOpacityAnimation.isRemovedOnCompletion = false
         achievementsNode.addAnimation(achievementsOpacityAnimation, forKey: "alphaAnimationRight")
         
         // Interests animations
@@ -164,8 +164,8 @@ class MainScene: SCNScene {
         interestsOpacityAnimation.toValue = 1.0
         interestsOpacityAnimation.duration = 1.0
         interestsOpacityAnimation.beginTime = CACurrentMediaTime() + 1.2
-        interestsOpacityAnimation.fillMode = kCAFillModeForwards;
-        interestsOpacityAnimation.removedOnCompletion = false;
+        interestsOpacityAnimation.fillMode = kCAFillModeForwards
+        interestsOpacityAnimation.isRemovedOnCompletion = false
         interestsNode.addAnimation(interestsOpacityAnimation, forKey: "interestsOpacityAnimation")
 
     }

@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2015 Meng To (meng@designcode.io)
+// Copyright (c) 2015 James Tang (j@jamztang.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,23 +21,40 @@
 // SOFTWARE.
 
 import UIKit
+import AudioToolbox
 
-@IBDesignable public class DesignableLabel: SpringLabel {
-
-    @IBInspectable public var lineHeight: CGFloat = 1.5 {
-        didSet {
-            var font = UIFont(name: self.font.fontName, size: self.font.pointSize)
-            var text = self.text
+public struct SoundPlayer {
+    
+    static var filename : String?
+    static var enabled : Bool = true
+    
+    private struct Internal {
+        static var cache = [URL:SystemSoundID]()
+    }
+    
+    public static func playSound(soundFile: String) {
+        
+        if !enabled {
+            return
+        }
+        
+        if let url = Bundle.main.url(forResource: soundFile, withExtension: nil) {
             
-            var paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineSpacing = lineHeight
+            var soundID : SystemSoundID = Internal.cache[url] ?? 0
             
-            var attributedString = NSMutableAttributedString(string: text!)
-            attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
-            attributedString.addAttribute(NSFontAttributeName, value: font!, range: NSMakeRange(0, attributedString.length))
+            if soundID == 0 {
+                AudioServicesCreateSystemSoundID(url as CFURL, &soundID)
+                Internal.cache[url] = soundID
+            }
             
-            self.attributedText = attributedString
+            AudioServicesPlaySystemSound(soundID)
+            
+        } else {
+            print("Could not find sound file name `\(soundFile)`")
         }
     }
-
+    
+    static func play(file: String) {
+        self.playSound(soundFile: file)
+    }
 }

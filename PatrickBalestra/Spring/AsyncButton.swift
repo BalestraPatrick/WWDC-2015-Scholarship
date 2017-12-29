@@ -21,42 +21,31 @@
 // SOFTWARE.
 
 import UIKit
-import AudioToolbox
 
-public class SoundPlayer: NSObject {
-
-    @IBInspectable var filename : String?
-    @IBInspectable var enabled : Bool = true
-
-    private struct Internal {
-        static var cache = [NSURL:SystemSoundID]()
-    }
-
-    public func playSound(soundFile:String) {
-
-        if !enabled {
-            return
-        }
-
-        if let url = NSBundle.mainBundle().URLForResource(soundFile, withExtension: nil) {
-
-            var soundID : SystemSoundID = Internal.cache[url] ?? 0
-
-            if soundID == 0 {
-                AudioServicesCreateSystemSoundID(url, &soundID)
-                Internal.cache[url] = soundID
+public class AsyncButton: UIButton {
+    
+    private var imageURL = [UInt:NSURL]()
+    private var placeholderImage = [UInt:UIImage]()
+    
+    
+    public func setImageURL(url: NSURL?, placeholderImage placeholder:UIImage?, forState state:UIControlState) {
+        
+        imageURL[state.rawValue] = url
+        placeholderImage[state.rawValue] = placeholder
+        
+        if let urlString = url?.absoluteString {
+            ImageLoader.sharedLoader.imageForUrl(urlString: urlString) { [weak self] image, url in
+                
+                if let strongSelf = self {
+                    
+                    DispatchQueue.main.async(execute: { () -> Void in
+                        if strongSelf.imageURL[state.rawValue]?.absoluteString == url {
+                            strongSelf.setImage(image, for: state)
+                        }
+                    })
+                }
             }
-
-            AudioServicesPlaySystemSound(soundID)
-
-        } else {
-            println("Could not find sound file name `\(soundFile)`")
         }
     }
-
-    @IBAction public func play(sender: AnyObject?) {
-        if let filename = filename {
-            self.playSound(filename)
-        }
-    }
+    
 }

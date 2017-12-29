@@ -24,23 +24,24 @@ class SkillsView: UIView {
     }
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         setUp()
     }
     
     private func setUp() {
         self.layer.cornerRadius = 10.0
-        self.backgroundColor = .clearColor()
+        self.backgroundColor = .clear
         
         var frameX = CGFloat(0.0)
         
-        for var i = 0; i < count(skills); i++ {
+        for i in  0...skills.count {
+        //for var i = 0; i < count(skills); i++ {
             let skill = skills[i]
             let label = UILabel(frame: CGRect(x: frameX, y: 0, width: 0, height: 0))
             label.text = skill
-            label.textAlignment = .Center
-            label.textColor = .blackColor()
-            label.layer.borderColor = UIColor.blackColor().CGColor
+            label.textAlignment = .center
+            label.textColor = .black
+            label.layer.borderColor = UIColor.black.cgColor
             label.layer.borderWidth = 1.0
             label.sizeToFit()
             label.layer.masksToBounds = true

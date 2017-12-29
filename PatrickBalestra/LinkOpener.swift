@@ -9,24 +9,24 @@
 import UIKit
 
 enum LinkOpener {
-    case Github
-    case Email
-    case Website
-    case Twitter
-    case Facebook
+    case github
+    case email
+    case website
+    case twitter
+    case facebook
     
     func openURL() {
         switch self {
-        case .Github:
-            UIApplication.sharedApplication().openURL(NSURL(string: "http://www.github.com/BalestraPatrick")!)
-        case .Email:
-            UIApplication.sharedApplication().openURL(NSURL(string: "mailto:me@patrickbalestra.com")!)
-        case .Website:
-            UIApplication.sharedApplication().openURL(NSURL(string: "http://www.patrickbalestra.com")!)
-        case .Twitter:
-            UIApplication.sharedApplication().openURL(NSURL(string: "http://www.twitter.com/BalestraPatrick")!)
-        case .Facebook:
-            UIApplication.sharedApplication().openURL(NSURL(string: "http://www.facebook.com/BalestraPatrick15")!)
+        case .github:
+            UIApplication.shared.openURL(URL(string: "http://www.github.com/BalestraPatrick")!)
+        case .email:
+            UIApplication.shared.openURL(URL(string: "mailto:me@patrickbalestra.com")!)
+        case .website:
+            UIApplication.shared.openURL(URL(string: "http://www.patrickbalestra.com")!)
+        case .twitter:
+            UIApplication.shared.openURL(URL(string: "http://www.twitter.com/BalestraPatrick")!)
+        case .facebook:
+            UIApplication.shared.openURL(URL(string: "http://www.facebook.com/BalestraPatrick15")!)
         }
     }
 }
