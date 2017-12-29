@@ -21,7 +21,7 @@ class AchievementTableViewCell: UITableViewCell, UIScrollViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        scrollView.scrollEnabled = true
+        scrollView.isScrollEnabled = true
         scrollView.delegate = self
         pageControl.currentPage = 0
     }
@@ -32,7 +32,7 @@ class AchievementTableViewCell: UITableViewCell, UIScrollViewDelegate {
             titleLabel.text = achievement?.title
             descriptionLabel.text = achievement?.description
 
-            scrollView.contentSize = CGSizeMake(CGFloat(achievement?.images.count ?? 0) * 768.0, 500)
+            scrollView.contentSize = CGSize(width: CGFloat(achievement?.images.count ?? 0) * 768.0, height: 500)
             pageControl.numberOfPages = achievement?.images.count ?? 0
             pagesCount = achievement?.images.count ?? 0
 
@@ -43,11 +43,11 @@ class AchievementTableViewCell: UITableViewCell, UIScrollViewDelegate {
     override func layoutSubviews() {
         
         // Clear the already stored images
-        pageViews.removeAll(keepCapacity: true)
+        pageViews.removeAll(keepingCapacity: true)
         
         // Load pages
         if pagesCount > 0 {
-            scrollView.contentSize = CGSizeMake(CGFloat(achievement?.images.count ?? 0) * 768.0, 500)
+            scrollView.contentSize = CGSize(width: CGFloat(achievement?.images.count ?? 0) * 768.0, height: 500)
             loadVisiblePages()
         }
         
@@ -63,56 +63,58 @@ class AchievementTableViewCell: UITableViewCell, UIScrollViewDelegate {
         let firstPage = page - 1
         let lastPage = page + 1
         
-        for var index = 0; index < firstPage; ++index {
-            purgePage(index)
+        for i in 0..<firstPage {
+//        for var index = 0; index < firstPage; ++index {
+            purgePage(i)
         }
         
         for index in firstPage...lastPage {
             loadPage(index)
         }
         
-        for var index = lastPage+1; index < achievement?.images.count; ++index {
-            purgePage(index)
+        for i in 0..<achievement!.images.count {
+//        for var index = lastPage+1; index < achievement?.images.count; ++index {
+            purgePage(i)
         }
     }
     
-    func loadPage(page: Int) {
-        if page < 0 || page >= achievement?.images.count {
+    func loadPage(_ page: Int) {
+        if page < 0 || page >= (achievement?.images.count)! {
             return
         }
         
         if pageViews[page] == nil {
             
-            let image = UIImage(named: achievement?.images[page] ?? "")!
-            let width = (500 / image.size.height) * image.size.width
-            var frame = CGRectZero
+            //let image = UIImage(named: achievement?.images[page] ?? "")!
+            //let width = (500 / image.size.height) * image.size.width
+            var frame = CGRect.zero
             frame.origin.x = 768 * CGFloat(page)
             frame.origin.y = 0.0
             frame.size.width = 768
             frame.size.height = 500
 
             let newPageView = UIImageView(image: UIImage(named: achievement?.images[page] ?? ""))
-            newPageView.contentMode = .ScaleAspectFit
+            newPageView.contentMode = .scaleAspectFit
             newPageView.frame = frame
             scrollView.addSubview(newPageView)
             pageViews[page] = newPageView
         }
     }
     
-    func purgePage(page: Int) {
-        if page < 0 || page >= achievement?.images.count {
+    func purgePage(_ page: Int) {
+        if page < 0 || page >= (achievement?.images.count)! {
             return
         }
         
         if let pageView = pageViews[page] {
             pageView.removeFromSuperview()
-            pageViews.removeValueForKey(page)
+            pageViews.removeValue(forKey: page)
         }
     }
     
     // MARK: UIScrollViewDelegate
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         loadVisiblePages()
     }
 

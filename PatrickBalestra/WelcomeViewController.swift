@@ -13,11 +13,11 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let tapGesture = UITapGestureRecognizer(target: self, action: "dismiss:")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismiss(_:)))
         self.view.addGestureRecognizer(tapGesture)
     }
 
-    @IBAction func dismiss(tapGesture: UITapGestureRecognizer) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @objc @IBAction func dismiss(_ tapGesture: UITapGestureRecognizer) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

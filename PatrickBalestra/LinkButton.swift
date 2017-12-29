@@ -11,7 +11,7 @@ import UIKit
 @IBDesignable class LinkButton: SpringButton {
     
     // MARK - Properties
-    @IBInspectable var defaultBackgroundColor: UIColor = UIColor.blackColor() {
+    @IBInspectable var defaultBackgroundColor: UIColor = UIColor.black {
         didSet {
             self.backgroundColor = defaultBackgroundColor
         }
@@ -30,14 +30,14 @@ import UIKit
     }
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         setUp()
     }
     
     private func setUp() {
         self.layer.cornerRadius = 10.0
         self.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-        self.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        self.setTitleColor(UIColor.white, for: .normal)
         self.setNeedsDisplay()
     }
     

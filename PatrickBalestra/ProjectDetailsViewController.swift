@@ -31,9 +31,9 @@ class ProjectDetailsViewController: UIViewController, SKStoreProductViewControll
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.translucent = false
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor(), NSFontAttributeName : UIFont(name: "HelveticaNeue-Light", size: 20)!]
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white, NSAttributedStringKey.font : UIFont(name: "HelveticaNeue-Light", size: 20)!]
         
         self.title = self.project?.title
         self.iconImageView.image = UIImage(named: self.project?.iconName ?? "")
@@ -46,30 +46,30 @@ class ProjectDetailsViewController: UIViewController, SKStoreProductViewControll
         self.thirdScreenshot.image = UIImage(named: self.project!.screenshotNames[2])
         self.skillsView.skills = self.project!.skills
         
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
             self.navigationController?.navigationBar.barTintColor = self.project?.appColor
         })
         
-        self.iconImageView.layer.shadowColor = UIColor.blackColor().CGColor
-        self.iconImageView.layer.shadowOffset = CGSizeMake(1, 1)
+        self.iconImageView.layer.shadowColor = UIColor.black.cgColor
+        self.iconImageView.layer.shadowOffset = CGSize(width: 1, height: 1)
         self.iconImageView.layer.shadowOpacity = 0.25
         
         self.viewInAppStore.backgroundColor = self.project?.appColor
-        self.viewInAppStore.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        self.viewInAppStore.setTitleColor(UIColor.black, for: .normal)
         
         self.viewWebsite.backgroundColor = self.project?.appColor
         if self.project?.title == "Notes for Watch" {
-            self.viewWebsite.setTitleColor(UIColor.blackColor(), forState: .Normal)
-            self.viewInAppStore.setTitleColor(UIColor.blackColor(), forState: .Normal)
+            self.viewWebsite.setTitleColor(UIColor.black, for: .normal)
+            self.viewInAppStore.setTitleColor(UIColor.black, for: .normal)
         } else {
-            self.viewWebsite.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-            self.viewInAppStore.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            self.viewWebsite.setTitleColor(UIColor.white, for: .normal)
+            self.viewInAppStore.setTitleColor(UIColor.white, for: .normal)
         }
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+    override func viewWillDisappear(_ animated: Bool) {
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
             self.navigationController?.navigationBar.barTintColor = UIColor(red:0.202, green:0.808, blue:0.459, alpha:1)
         })
     }
@@ -77,7 +77,7 @@ class ProjectDetailsViewController: UIViewController, SKStoreProductViewControll
     // MARK: IBActions
     
     @IBAction func dismiss(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func viewInAppStore(sender: AnyObject) {
@@ -86,27 +86,27 @@ class ProjectDetailsViewController: UIViewController, SKStoreProductViewControll
     
     @IBAction func viewWebsite(sender: AnyObject) {
         let URL = self.project!.websiteLink
-        UIApplication.sharedApplication().openURL(URL)
+        UIApplication.shared.openURL(URL)
     }
     
     // MARK: Methods
     
-    func openProjectInAppStore(appID: String) {
-        var viewController: SKStoreProductViewController = SKStoreProductViewController()
-        var parameters = [
+    func openProjectInAppStore(_ appID: String) {
+        let viewController: SKStoreProductViewController = SKStoreProductViewController()
+        let parameters = [
             SKStoreProductParameterITunesItemIdentifier : appID,
         ]
         viewController.delegate = self
-        viewController.loadProductWithParameters(parameters, completionBlock: { (completed, error) -> Void in
-            println(error)
+        viewController.loadProduct(withParameters: parameters, completionBlock: { (completed, error) -> Void in
+            print(error ?? "ok")
         })
-        self.presentViewController(viewController, animated: true) { () -> Void in }
+        self.present(viewController, animated: true) { () -> Void in }
     }
     
     // MARK: SKStoreProductViewControllerDelegate
     
-    func productViewControllerDidFinish(viewController: SKStoreProductViewController!) {
-        viewController.dismissViewControllerAnimated(true, completion: nil)
+    func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
+        viewController.dismiss(animated: true, completion: nil)
     }
 
 }

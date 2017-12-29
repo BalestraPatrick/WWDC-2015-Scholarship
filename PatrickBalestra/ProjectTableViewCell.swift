@@ -24,17 +24,17 @@ class ProjectTableViewCell: UITableViewCell {
         
         iconImageView.layer.cornerRadius = 32.0;
         iconImageView.layer.masksToBounds = true
-        iconImageView.layer.borderColor = UIColor.blackColor().CGColor
+        iconImageView.layer.borderColor = UIColor.black.cgColor
         iconImageView.layer.borderWidth = 1.0
         
         appStoreButton.layer.cornerRadius = 8.0
-        appStoreButton.layer.borderColor = UIColor.blackColor().CGColor
-        appStoreButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        appStoreButton.layer.borderColor = UIColor.black.cgColor
+        appStoreButton.setTitleColor(UIColor.black, for: .normal)
         appStoreButton.layer.borderWidth = 1.0
         
         websiteButton.layer.cornerRadius = 8.0
-        websiteButton.layer.borderColor = UIColor.blackColor().CGColor
-        websiteButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        websiteButton.layer.borderColor = UIColor.black.cgColor
+        websiteButton.setTitleColor(UIColor.black, for: .normal)
         websiteButton.layer.borderWidth = 1.0
     }
     

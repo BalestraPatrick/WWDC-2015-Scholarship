@@ -19,43 +19,43 @@ class AboutMeViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
 
         self.navigationController?.navigationBar.barTintColor = UIColor(red:0.2, green:0.381, blue:0.88, alpha:1)
-        self.navigationController?.navigationBar.translucent = false
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor(), NSFontAttributeName : UIFont(name: "HelveticaNeue-Light", size: 20)!]
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white, NSAttributedStringKey.font : UIFont(name: "HelveticaNeue-Light", size: 20)!]
     }
     
-    override func viewDidAppear(animated: Bool) {
-        self.scrollView.contentSize = CGSizeMake(self.view.frame.width, 1300)
+    override func viewDidAppear(_ animated: Bool) {
+        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 1300)
     }
     
     // MARK - IBActions
     
     @IBAction func dismiss(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func openGithub(sender: LinkButton) {
-        LinkOpener.Github.openURL()
+        LinkOpener.github.openURL()
     }
     
     @IBAction func sendEmail(sender: LinkButton) {
-        LinkOpener.Email.openURL()
+        LinkOpener.email.openURL()
     }
     
     @IBAction func openWebsite(sender: LinkButton) {
-        LinkOpener.Website.openURL()
+        LinkOpener.website.openURL()
     }
     
     @IBAction func openTwitter(sender: LinkButton) {
-        LinkOpener.Twitter.openURL()
+        LinkOpener.twitter.openURL()
     }
 
     @IBAction func openFacebook(sender: LinkButton) {
-        LinkOpener.Facebook.openURL()
+        LinkOpener.facebook.openURL()
     }
     
     // MARK - UITextViewDelegate
 
-    func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         return false
     }
     

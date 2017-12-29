@@ -18,8 +18,8 @@ class ProjectsCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 
         self.navigationController?.navigationBar.barTintColor = UIColor(red:0.202, green:0.808, blue:0.459, alpha:1)
-        self.navigationController?.navigationBar.translucent = false
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor(), NSFontAttributeName : UIFont(name: "HelveticaNeue-Light", size: 20)!]
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white, NSAttributedStringKey.font : UIFont(name: "HelveticaNeue-Light", size: 20)!]
         
         let collectionViewLayout = UICollectionViewFlowLayout()
         collectionViewLayout.itemSize = CGSize(width: 350, height: 270)
@@ -30,38 +30,37 @@ class ProjectsCollectionViewController: UICollectionViewController {
     // MARK: IBActions
     
     @IBAction func dismiss(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
                 case "ProjectDetails":
-                let nextController = segue.destinationViewController as? ProjectDetailsViewController
-                if let selectedIndex = self.collectionView?.indexPathsForSelectedItems().first?.row {
+                let nextController = segue.destination as? ProjectDetailsViewController
+                if let selectedIndex = self.collectionView?.indexPathsForSelectedItems?.first?.row {
                     nextController?.project = self.projectsDataSource.projects[selectedIndex]
                 }
             default:
-                println()
+                print()
             }
         }
     }
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.projectsDataSource.projects.count
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.projectCollectionViewCellReuseIdentifier, forIndexPath: indexPath) as! ProjectCollectionViewCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.projectCollectionViewCellReuseIdentifier, for: indexPath) as! ProjectCollectionViewCell
     
         cell.project = self.projectsDataSource.projects[indexPath.row]
         
